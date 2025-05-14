@@ -43,7 +43,12 @@ const ServiceDomainSelection = ({ navigation }) => {
            <View style={styles.headerLine} />
             <Text style={styles.appTitle}>Service Domain Selection</Text>
          
-            <ScrollView style={styles.scrollView}
+            <ScrollView 
+            style={styles.scrollContainer}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 100 }}
+
             >
                 <View style={styles.card}>
                     <Text style={styles.title}>Service Domain Selection</Text>
@@ -53,10 +58,7 @@ const ServiceDomainSelection = ({ navigation }) => {
                         <Text style={styles.sectionTitle}>Main Service</Text>
 
                         <TextInput
-
                             placeholder="Service  Name"
-
-
                         />
                         <Picker
                             selectedValue={mainService}
@@ -149,7 +151,9 @@ const styles = StyleSheet.create({
         },
     headerLine: { height: 3, backgroundColor: '#6200ee', width: '50%', marginTop: 10 },
     appTitle: { fontSize: 24, color: '#6200ee', textAlign: 'center', marginVertical: 10, fontWeight: 'bold' },
-    scrollView: { flex: 1 },
+    scrollContainer: {
+    flex: 1,
+  },
     card: { margin: 16, padding: 16, backgroundColor: '#FFFFFF', borderRadius: 8, elevation: 5 },
     title: { fontSize: 20, fontWeight: 'bold', marginBottom: 20 },
     section: { marginBottom: 20 },

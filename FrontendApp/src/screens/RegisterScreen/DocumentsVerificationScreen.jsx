@@ -44,6 +44,7 @@ const DocumentsVerification = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.innerContainer}>
+                                                      <View style={styles.headerLine} />
                 <Text style={styles.appTitle}>Document Verification</Text>
 
                 <ScrollView
@@ -116,6 +117,11 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderTopColor: '#eee',
     },
+     headerLine: {
+                            height: 3,
+                            backgroundColor: '#6200ee',
+                            width: '30%',
+              },
 });
 
 export default DocumentsVerification;

@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import {
     View,
     Text,
-    TextInput,
-    TouchableOpacity,
     StyleSheet,
     SafeAreaView,
     StatusBar,
     Alert,
-    Image,
     ScrollView,
+    Platform
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import CustomCard from '../../components/CardUpload';
@@ -45,44 +43,46 @@ const DocumentsVerification = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-<View style={styles.headerView} >
-            {/* <View style={styles.headerLine} /> */}
-            <Text style={styles.appTitle}>Document Verification</Text>
-</View>
-            <ScrollView
-                style={styles.scrollContainer}
-                // contentContainerStyle={{ flexGrow: 1 }}
-                keyboardShouldPersistTaps="handled"
-                showsVerticalScrollIndicator={false}
-            >
-                <CustomCard
-                    type="aadhaar"
-                    label="Aadhaar Number "
-                    placeholder="Enter Aadhaar Number"
-                    imageUri={aadhaar}
-                    onUpload={() => handleUpload('aadhaar')}
-                />
-                <CustomCard
-                    type="pan"
-                    label="PAN Number"
-                    placeholder="Enter PAN Number"
-                    imageUri={pan}
-                    onUpload={() => handleUpload('pan')}
-                />
-                <CustomCard
-                    type="selfie"
-                    label="Selfie"
-                    placeholder="Take Selfie"
-                    imageUri={selfie}
-                    onUpload={() => handleUpload('selfie')}
-                />
-            </ScrollView>
+            <View style={styles.innerContainer}>
+                <Text style={styles.appTitle}>Document Verification</Text>
 
-            {/* Next Button (Outside ScrollView) */}
-            <CustomButton
-                title={'Next'}
-                onPress={() => navigation.navigate("ProfessionalDocuments")}
-                isActive={isNextEnabled} />
+                <ScrollView
+                    style={styles.scrollContainer}
+                    keyboardShouldPersistTaps="handled"
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ paddingBottom: 100 }}
+                >
+                    <CustomCard
+                        type="aadhaar"
+                        label="Aadhaar Number "
+                        placeholder="Enter Aadhaar Number"
+                        imageUri={aadhaar}
+                        onUpload={() => handleUpload('aadhaar')}
+                    />
+                    <CustomCard
+                        type="pan"
+                        label="PAN Number"
+                        placeholder="Enter PAN Number"
+                        imageUri={pan}
+                        onUpload={() => handleUpload('pan')}
+                    />
+                    <CustomCard
+                        type="selfie"
+                        label="Selfie"
+                        placeholder="Take Selfie"
+                        imageUri={selfie}
+                        onUpload={() => handleUpload('selfie')}
+                    />
+                </ScrollView>
+
+                <View style={styles.bottomButtonContainer}>
+                    <CustomButton
+                        title={'Next'}
+                        onPress={() => navigation.navigate("ProfessionalDocuments")}
+                        isActive={isNextEnabled}
+                    />
+                </View>
+            </View>
         </SafeAreaView>
     );
 };
@@ -91,60 +91,30 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
-        // padding: 16
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
-
-    headerView: {
-       
-      marginTop: 20,
-        // height: 3,
-        // backgroundColor: '#6200ee',
-        // width: '30%',
+    innerContainer: {
+        flex: 1,
     },
     scrollContainer: {
         flex: 1,
     },
-     appTitle: { fontSize: 24,
-         color: '#6200ee',
-          textAlign: 'center',
-           marginVertical: 10,
-            fontWeight: 'bold' },
-
-    title: {
-        fontSize: 20,
+    appTitle: {
+        fontSize: 24,
+        color: '#6200ee',
+        textAlign: 'center',
+        marginVertical: 10,
         fontWeight: 'bold',
-        marginBottom: 24,
     },
-    label: {
-        fontSize: 16,
-        color: '#333333',
-        marginBottom: 8,
-    },
-
-    nextButton: {
-        backgroundColor: '#F0F0F0',
+    bottomButtonContainer: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
         padding: 16,
-        borderRadius: 4,
-        alignItems: 'center',
-        margin: 16,
-        // marginTop:10
-    },
-    nextButtonEnabled: {
-        backgroundColor: '#6200ee',
-    },
-    nextButtonText: {
-        color: '#666666',
-        fontSize: 16,
-        fontWeight: '500',
-    },
-    nextButtonTextEnabled: {
-        color: '#FFFFFF',
-    },
-    imagePreview: {
-        width: 100,
-        height: 100,
-        borderRadius: 8,
-        marginTop: 8,
+        backgroundColor: '#fff',
+        borderTopWidth: 1,
+        borderTopColor: '#eee',
     },
 });
 

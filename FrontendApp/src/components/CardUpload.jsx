@@ -10,7 +10,7 @@ const CustomCard = ({ type, label, placeholder, imageUri, onUpload }) => {
         <TextInput
           style={styles.input}
           placeholder={placeholder}
-          placeholderTextColor="#999"
+          placeholderTextColor="#999999"
         />
       )}
       <TouchableOpacity style={styles.uploadButton} onPress={() => onUpload(type)}>
